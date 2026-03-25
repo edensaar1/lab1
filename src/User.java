@@ -18,6 +18,7 @@ public class User {
         }
         else if(!password.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@#!_,.+])[A-Za-z0-9@#!_,.+]+$")){
             throw new Exception("Please enter a valid password");
+
         }
 
         this.username = username;
