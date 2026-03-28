@@ -1,4 +1,4 @@
-public class User {
+public class User implements Comparable<User> {
     String username;
     String password;
 
@@ -23,5 +23,10 @@ public class User {
 
         this.username = username;
         this.password = password;
+    }
+
+    @Override
+    public int compareTo(User other){
+        return this.username.compareTo(other.username);
     }
 }
