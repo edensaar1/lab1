@@ -6,7 +6,7 @@ public class User implements Comparable<User> {
         if(username.length() > 50){
             throw new Exception("Username is too long, try something shorter");
         }
-        else if(!username.matches("^[A-Za-z0-9][A-Za-z0-9._%+-]+@[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z]{2,}$")){
+        else if(!username.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z]{2,}$")){
            throw new Exception("Please enter a valid Email as username");
         }
 
@@ -16,7 +16,7 @@ public class User implements Comparable<User> {
         else if(password.length() > 12){
             throw new Exception("Your password is too long, try a shorter one");
         }
-        else if(!password.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@#!_,.+])[A-Za-z0-9@#!_,.+]+$")){
+        else if(!password.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=])[A-Za-z0-9!@#$%^&*()_+\\-=]+$")){
             throw new Exception("Please enter a valid password");
 
         }
