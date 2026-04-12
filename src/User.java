@@ -1,7 +1,9 @@
+//user class with comparison operator
 public class User implements Comparable<User> {
     String username;
     String password;
 
+    // c'tor of user with length checks and the matching regex expressions to the requirements
     public User(String username, String password) throws Exception{
         if(username.length() > 50){
             throw new Exception("Username is too long, try something shorter");
