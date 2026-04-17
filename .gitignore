@@ -1,0 +1,15 @@
+# IntelliJ
+.idea/
+
+# Build output
+out/
+target/
+*.class
+
+# Output files
+out.txt
+output.txt
+
+# Optional IntelliJ files
+workspace.xml
+shelf/
