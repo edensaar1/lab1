@@ -3,6 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+// loads the login architecture and sets the scene on stage
 public class MainApp extends Application {
 
     @Override

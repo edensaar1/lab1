@@ -23,12 +23,13 @@ public class LoginController {
     private ArrayList<User> users = UsersApp.loadUsers();
 
     @FXML
+    // handling input from user and comparing it to the stored valid users //
     private void handleLogin(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
         boolean valid = UsersApp.validateLogin(username, password, users);
-
+    // if input matches a valid user, we change screen to welcome screen
         if (valid) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/welcome.fxml"));
@@ -40,7 +41,9 @@ public class LoginController {
             } catch (Exception e) {
                 errorLabel.setText("Error loading welcome screen");
             }
-        } else {
+        }
+    // else we send invalid details message//
+        else {
             errorLabel.setText("Invalid username or password");
         }
     }
