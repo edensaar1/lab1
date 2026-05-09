@@ -8,6 +8,8 @@ import  java.util.Collections;
 
 
 public class UsersApp {
+    static int maxAttempts;
+    static int blockTime;
     public static void main(String[] args) {
         // building array of users to hold the input
         ArrayList<User> users = new ArrayList<>();
@@ -88,13 +90,41 @@ public class UsersApp {
         return users;
     }
 
-    public static boolean validateLogin(String username, String password, ArrayList<User> users) {
+    public static LoginResult validateLogin(String username, String password, ArrayList<User> users) {
         for (User user : users) {
-            if (user.username.equals(username) && user.password.equals(password)) {
-                return true;
+            if(user.username.equals(username) && user.blocked){
+                return LoginResult.USER_BLOCKED;
+            }
+            else if (user.username.equals(username) && user.password.equals(password)) {
+                user.failedAttempts = 0;
+                return LoginResult.SUCCESS;
+            }
+            else if(user.username.equals(username) && !user.password.equals(password)){
+                user.failedAttempts++;
+                if (user.failedAttempts >= UsersApp.maxAttempts){
+                    user.blocked = true;
+                    startBlockTimer(user);
+                    return LoginResult.USER_NOW_BLOCKED;
+                }
+                return LoginResult.INVALID_CREDENTIALS;
             }
         }
-        return false;
+        return LoginResult.INVALID_CREDENTIALS;
+    }
+
+    public static void startBlockTimer(User user) {
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(blockTime * 1000);
+
+                user.blocked = false;
+                user.failedAttempts = 0;
+            } catch (InterruptedException e) {
+                System.out.println("Thread interrupted");
+            }
+
+        });
+        thread.start();
     }
 }
 

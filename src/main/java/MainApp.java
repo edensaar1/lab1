@@ -17,6 +17,8 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
+        UsersApp.maxAttempts = Integer.parseInt(args[0]);
+        UsersApp.blockTime = Integer.parseInt(args[1]);
         launch();
     }
 }

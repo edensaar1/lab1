@@ -2,6 +2,8 @@
 public class User implements Comparable<User> {
     String username;
     String password;
+    int failedAttempts;
+    boolean blocked;
 
     // c'tor of user with length checks and the matching regex expressions to the requirements
     public User(String username, String password) throws Exception{
@@ -25,6 +27,8 @@ public class User implements Comparable<User> {
 
         this.username = username;
         this.password = password;
+        this.failedAttempts = 0;
+        this.blocked = false;
     }
 
     @Override

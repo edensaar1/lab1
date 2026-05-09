@@ -28,9 +28,9 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        boolean valid = UsersApp.validateLogin(username, password, users);
+        LoginResult result = UsersApp.validateLogin(username, password, users);
     // if input matches a valid user, we change screen to welcome screen
-        if (valid) {
+        if (result == LoginResult.SUCCESS) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/welcome.fxml"));
                 Scene welcomeScene = new Scene(loader.load());
@@ -43,8 +43,14 @@ public class LoginController {
             }
         }
     // else we send invalid details message//
-        else {
+        else if(result == LoginResult.INVALID_CREDENTIALS) {
             errorLabel.setText("Invalid username or password");
+        }
+        else if(result == LoginResult.USER_BLOCKED){
+            errorLabel.setText("User has already been blocked");
+        }
+        else{
+            errorLabel.setText("Too many attempts were used");
         }
     }
 }
