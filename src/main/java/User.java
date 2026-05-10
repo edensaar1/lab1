@@ -1,4 +1,6 @@
 //user class with comparison operator
+/*in lab3 we added new fields: 1. counter of failed attempts for a given moment,
+2. a flag which tells if user is currently blocked or not*/
 public class User implements Comparable<User> {
     String username;
     String password;
@@ -27,6 +29,7 @@ public class User implements Comparable<User> {
 
         this.username = username;
         this.password = password;
+        //when user first created it has 0 trials and is not blocked//
         this.failedAttempts = 0;
         this.blocked = false;
     }

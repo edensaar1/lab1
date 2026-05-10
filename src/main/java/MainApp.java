@@ -15,7 +15,7 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+    // receiving max attempts and time of block from user //
     public static void main(String[] args) {
         UsersApp.maxAttempts = Integer.parseInt(args[0]);
         UsersApp.blockTime = Integer.parseInt(args[1]);

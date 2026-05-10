@@ -89,29 +89,36 @@ public class UsersApp {
 
         return users;
     }
-
+    // we go over all users and separate to multiple cases://
     public static LoginResult validateLogin(String username, String password, ArrayList<User> users) {
         for (User user : users) {
+            //if username matches existing user but he is currently blocked return blocked//
             if(user.username.equals(username) && user.blocked){
                 return LoginResult.USER_BLOCKED;
             }
+            //if we managed to log in and user isnt blocked return success//
             else if (user.username.equals(username) && user.password.equals(password)) {
                 user.failedAttempts = 0;
                 return LoginResult.SUCCESS;
             }
+            //if username exists but password is wrong increase failed attempts and check if user just got blocked//
             else if(user.username.equals(username) && !user.password.equals(password)){
                 user.failedAttempts++;
+                //if user ran out of attempts we block him using helper//
                 if (user.failedAttempts >= UsersApp.maxAttempts){
                     user.blocked = true;
                     startBlockTimer(user);
+                    //return that user just got blocked//
                     return LoginResult.USER_NOW_BLOCKED;
                 }
+                //else return details are invalid//
                 return LoginResult.INVALID_CREDENTIALS;
             }
         }
+        //username isn't legal so no "attempts" are used//
         return LoginResult.INVALID_CREDENTIALS;
     }
-
+// helper that starts thread//
     public static void startBlockTimer(User user) {
         Thread thread = new Thread(() -> {
             try {
